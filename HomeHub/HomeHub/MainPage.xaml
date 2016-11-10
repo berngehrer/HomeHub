@@ -7,7 +7,36 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
+    <Page.Resources>
+        <SolidColorBrush x:Key="DefaultColor" Color="{ThemeResource SystemAccentColor}" Opacity="1.0" />
+        <SolidColorBrush x:Key="LightColor" Color="{ThemeResource SystemAccentColor}" Opacity="0.75" />
+    </Page.Resources>
+
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+       
+
+        <SplitView x:Name="svwMain" DisplayMode="CompactOverlay" IsPaneOpen="False" CompactPaneLength="60" OpenPaneLength="300" PaneBackground="LightGray">
+            <SplitView.Pane>
+                <Grid Height="60" HorizontalAlignment="Stretch" VerticalAlignment="Top" Background="{StaticResource LightColor}" Opacity="0.6">
+                    <Button Width="60" Height="60" Background="{StaticResource DefaultColor}" Click="Button_Click" HorizontalAlignment="Left">
+                        <Button.Content>
+                            <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE700;" FontSize="35" />
+                        </Button.Content>
+                    </Button>
+                </Grid>
+                
+            </SplitView.Pane>
+            <SplitView.Content>
+                <Pivot>
+                    <PivotItem Header="Status">
+                        <local:MyUserControl1 />
+                    </PivotItem>
+                    <PivotItem Header="Weather">
+                        <Button Content="TV" Click="Button_Click_1" />
+                    </PivotItem>
+                </Pivot>
+            </SplitView.Content>
+        </SplitView>
 
     </Grid>
 </Page>

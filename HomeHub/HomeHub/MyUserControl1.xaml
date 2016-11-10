@@ -1,0 +1,75 @@
+﻿<UserControl xmlns:my1="using:Syncfusion.UI.Xaml.Charts"  xmlns:my="using:Syncfusion.UI.Xaml.Gauges" 
+    x:Class="HomeHub.MyUserControl1"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:HomeHub"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d" Margin="200,100">
+
+    <UserControl.Resources>
+        <SolidColorBrush x:Key="DefaultBG" Color="SteelBlue" Opacity="0.4" />
+        <LinearGradientBrush x:Key="NewColor" StartPoint="0,.5" EndPoint="1,.5" Opacity="0.6">
+            <GradientStop Offset=".1" Color="SteelBlue" />
+            <GradientStop Offset=".8" Color="DarkCyan" />
+        </LinearGradientBrush>
+    </UserControl.Resources>
+    
+    <StackPanel Orientation="Vertical">
+
+        <!--<my:SfCircularGauge GaugeHeaderPosition="0.35,0.4" Height="280" Width="280">
+            <my:SfCircularGauge.GaugeHeader>
+                <TextBlock Text="Heizung" />
+            </my:SfCircularGauge.GaugeHeader>
+            <my:SfCircularGauge.Scales>
+                <my:CircularScale  RimStroke="#39b2c6" TickStroke="#c1c1c1" SmallTickStroke="#c1c1c1"  SmallTickLength="8" RimStrokeThickness="5"
+                                          LabelStroke="#999999" FontSize="10" FontWeight="SemiBold"  SmallTickStrokeThickness="2" 
+                                          Interval="40" MinorTicksPerInterval="2" TickLength="20" TickStrokeThickness="1" BindRangeStrokeToLabels="False" BindRangeStrokeToTicks="False"
+                                          StartAngle="135" SweepAngle="270" StartValue="0" EndValue="200" RangePosition="SetAsGaugeRim" >
+
+                    <my:CircularScale.Ranges>
+                        <my:CircularRange StartValue="16" EndValue="26"  Stroke="#d1dbdb"  />
+                    </my:CircularScale.Ranges>
+                    <my:CircularScale.Pointers>
+                        <my:CircularPointer EnableAnimation="False" PointerCapDiameter="20" PointerType="NeedlePointer" NeedlePointerStroke="#39b2c6" NeedlePointerStrokeThickness="3" NeedleLengthFactor="0.6" PointerCapStroke="#414d4f" Value="22"/>
+                    </my:CircularScale.Pointers>
+                    
+                </my:CircularScale>
+            </my:SfCircularGauge.Scales>
+        </my:SfCircularGauge>-->
+
+        
+        <Border Height="300" Background="{StaticResource NewColor}" CornerRadius="10">
+            
+            <StackPanel Orientation="Vertical">
+                <TextBlock Margin="10" Text="21.3°C" FontWeight="SemiBold" Foreground="White" FontSize="30" HorizontalAlignment="Center" />
+                <Line VerticalAlignment="Top" Stroke="White" X1="0" X2="500" StrokeThickness="2" HorizontalAlignment="Center" />
+                <Image Margin="10" VerticalAlignment="Center" Width="120" Height="120" Stretch="Uniform" Source="ms-appx://HomeHub/Assets/Weather/29.png" />
+            </StackPanel>
+            
+        </Border>
+
+        <!--<my1:SfChart>
+            <my1:SfChart.PrimaryAxis>
+                <my1:DateTimeAxis>
+                    
+                </my1:DateTimeAxis>
+            </my1:SfChart.PrimaryAxis>
+            <my1:SfChart.SecondaryAxis>
+                <my1:NumericalAxis>
+                    
+                </my1:NumericalAxis>
+            </my1:SfChart.SecondaryAxis>
+            <my1:LineSeries />
+        </my1:SfChart>-->
+
+        <TextBlock x:Name="txtTemp" FontSize="30" />
+        <TextBlock x:Name="txtHum" FontSize="40" />
+        <TextBlock x:Name="txtPPM" FontSize="50" />
+        <TextBlock x:Name="txtWater" FontSize="50" />
+
+        <Button Content="Led" Click="Button_Click"></Button>
+
+    </StackPanel>
+    
+</UserControl>

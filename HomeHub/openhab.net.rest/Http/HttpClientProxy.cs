@@ -33,14 +33,11 @@ namespace openhab.net.rest.Http
             }
         }
 
-        public Task<bool> SendMessage(MessageHandler message)
+        public async Task<bool> SendMessage(MessageHandler message)
         {
-            // TODO: Async problem!
-            var task = GetResponse(message);
-            task.Wait();
-            using (var response = task.Result) 
+            using (var response = await GetResponse(message))
             {
-                return Task.FromResult(response.IsSuccessStatusCode);
+                return response.IsSuccessStatusCode; 
             }
         }
 
@@ -83,7 +80,10 @@ namespace openhab.net.rest.Http
                 request.Headers.Add("X-Atmosphere-tracking-id", _pooling.ToString());
             }
             if (!string.IsNullOrEmpty(message.Content)) {
-                request.Content = new StringContent(message.Content, Encoding.UTF8, message.MimeString);
+                request.Version = new Version(1, 1);
+                request.Content = new StringContent(message.Content); 
+                request.Content.Headers.ContentType = new MediaTypeHeaderValue(message.MimeString);
+                request.Content.Headers.ContentLength = message.Content.Length;                
             }
             return request;
         }

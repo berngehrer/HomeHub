@@ -98,6 +98,9 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MyUserControl1.xaml.cs">
+      <DependentUpon>MyUserControl1.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -106,6 +109,55 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Weather\0.png" />
+    <Content Include="Assets\Weather\1.png" />
+    <Content Include="Assets\Weather\10.png" />
+    <Content Include="Assets\Weather\11.png" />
+    <Content Include="Assets\Weather\12.png" />
+    <Content Include="Assets\Weather\13.png" />
+    <Content Include="Assets\Weather\14.png" />
+    <Content Include="Assets\Weather\15.png" />
+    <Content Include="Assets\Weather\16.png" />
+    <Content Include="Assets\Weather\17.png" />
+    <Content Include="Assets\Weather\18.png" />
+    <Content Include="Assets\Weather\19.png" />
+    <Content Include="Assets\Weather\2.png" />
+    <Content Include="Assets\Weather\20.png" />
+    <Content Include="Assets\Weather\21.png" />
+    <Content Include="Assets\Weather\22.png" />
+    <Content Include="Assets\Weather\23.png" />
+    <Content Include="Assets\Weather\24.png" />
+    <Content Include="Assets\Weather\25.png" />
+    <Content Include="Assets\Weather\26.png" />
+    <Content Include="Assets\Weather\27.png" />
+    <Content Include="Assets\Weather\28.png" />
+    <Content Include="Assets\Weather\29.png" />
+    <Content Include="Assets\Weather\3.png" />
+    <Content Include="Assets\Weather\30.png" />
+    <Content Include="Assets\Weather\31.png" />
+    <Content Include="Assets\Weather\32.png" />
+    <Content Include="Assets\Weather\33.png" />
+    <Content Include="Assets\Weather\34.png" />
+    <Content Include="Assets\Weather\35.png" />
+    <Content Include="Assets\Weather\36.png" />
+    <Content Include="Assets\Weather\37.png" />
+    <Content Include="Assets\Weather\38.png" />
+    <Content Include="Assets\Weather\39.png" />
+    <Content Include="Assets\Weather\4.png" />
+    <Content Include="Assets\Weather\40.png" />
+    <Content Include="Assets\Weather\41.png" />
+    <Content Include="Assets\Weather\42.png" />
+    <Content Include="Assets\Weather\43.png" />
+    <Content Include="Assets\Weather\44.png" />
+    <Content Include="Assets\Weather\45.png" />
+    <Content Include="Assets\Weather\46.png" />
+    <Content Include="Assets\Weather\47.png" />
+    <Content Include="Assets\Weather\5.png" />
+    <Content Include="Assets\Weather\6.png" />
+    <Content Include="Assets\Weather\7.png" />
+    <Content Include="Assets\Weather\8.png" />
+    <Content Include="Assets\Weather\9.png" />
+    <Content Include="Assets\Weather\na.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -124,11 +176,24 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="MyUserControl1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
+    <SDKReference Include="Syncfusion Controls for UWP XAML, Version=13.4.0.53">
+      <Name>Syncfusion Controls for UWP XAML</Name>
+    </SDKReference>
     <SDKReference Include="WindowsIoT, Version=10.0.10586.0">
       <Name>Windows IoT Extensions for the UWP</Name>
     </SDKReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\openhab.net.rest\openhab.net.rest.csproj">
+      <Project>{7b5deb49-9069-4a69-adf2-47171b4639f8}</Project>
+      <Name>openhab.net.rest</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

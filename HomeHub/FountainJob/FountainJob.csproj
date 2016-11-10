@@ -97,9 +97,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants.cs" />
-    <Compile Include="DelayTimer.cs" />
-    <Compile Include="I2CClient.cs" />
-    <Compile Include="Modus.cs" />
     <Compile Include="RuntimeManager.cs" />
     <Compile Include="StartupTask.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

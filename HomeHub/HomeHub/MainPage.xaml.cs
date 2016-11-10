@@ -4,6 +4,8 @@ using Windows.UI.Xaml.Controls;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using openhab.net.rest.Items;
+using openhab.net.rest;
 
 enum Modus
 {
@@ -98,14 +100,17 @@ class WaterLightClient : I2CClient
 
 namespace HomeHub
 {
-    public sealed partial class MainPage : Page
+    public sealed partial class MainPage : Page, IDisposable
     {
+        ItemContext _context;
+        SwitchItem _tvled;
         byte[] i2CReadBuffer;
 
-        private const byte SLAVE_ADDRESS    = 0x33;
+        private const byte SLAVE_ADDRESS    = 0x40;
 
         private const byte CMD_MODUS = 0x01;
-        private const byte CMD_REMOTE = 0x02;
+        private const byte CMD_SEQUENCE = 0x02;
+        private const byte CMD_WATERLEVEL = 0x03;
         private const byte CMD_LED1 = 0x11;
         private const byte CMD_LED2 = 0x12;
         private const byte CMD_LED3 = 0x13;
@@ -116,9 +121,17 @@ namespace HomeHub
         {
             this.InitializeComponent();
 
-            StartI2C();
+            //GetLed();
+            //StartI2C();
         }
 
+        async void GetLed()
+        {
+            _context = new ItemContext("192.168.178.69");
+            _tvled = await _context.GetByName<SwitchItem>("MQTT_TVLED_POW");
+            
+        }
+        
 
         async void StartI2C()
         {
@@ -145,30 +158,68 @@ namespace HomeHub
             //}
 
 
+            I2cDevice device;
             try
             {
-                i2CReadBuffer = new byte[3];
+                i2CReadBuffer = new byte[1];
                 var i2cSettings = new I2cConnectionSettings(SLAVE_ADDRESS);
 
                 string aqs = I2cDevice.GetDeviceSelector();
 
                 var dis = await DeviceInformation.FindAllAsync(aqs);
-                var device = await I2cDevice.FromIdAsync(dis[0].Id, i2cSettings);
 
-                device.WriteRead(new byte[] { CMD_MODUS, (byte)Modus.PUMP }, i2CReadBuffer);
-                device.WriteRead(new byte[] { CMD_MODUS, (byte)Modus.LED }, i2CReadBuffer);
-                device.WriteRead(new byte[] { CMD_MODUS, (byte)Modus.ON }, i2CReadBuffer);
-                device.WriteRead(new byte[] { CMD_REMOTE }, i2CReadBuffer);
-                device.WriteRead(new byte[] { CMD_LED1 }, i2CReadBuffer);
-                device.WriteRead(new byte[] { CMD_LED1, 0x00, 0xFF, 0x00 }, i2CReadBuffer);
+                string id = dis[0].Id;
+
+                device = await I2cDevice.FromIdAsync(id, i2cSettings);
+
+                //device.WriteRead(new byte[] { CMD_MODUS, (byte)Modus.PUMP }, i2CReadBuffer);
+                //device.WriteRead(new byte[] { CMD_MODUS, (byte)Modus.LED }, i2CReadBuffer);
+                //device.WriteRead(new byte[] { CMD_MODUS, (byte)Modus.ON }, i2CReadBuffer);
+                //device.WriteRead(new byte[] { CMD_REMOTE }, i2CReadBuffer);
+                //device.WriteRead(new byte[] { CMD_LED1 }, i2CReadBuffer);
+                //device.WriteRead(new byte[] { CMD_LED1, 0x00, 0xFF, 0x00 }, i2CReadBuffer);
+
+                //device.WriteRead(new byte[] { 0x14 }, i2CReadBuffer);
+                //var a = BitConverter.ToInt16(i2CReadBuffer, 0);
+
+                //device.Write(new byte[] { CMD_MODUS, (byte)Modus.ON });
+                //device.WriteRead(new byte[] { 0x01 }, i2CReadBuffer);
+                //device.WriteRead(new byte[] { 0x01, 0x01 }, i2CReadBuffer);
+
+                //device.Write(new byte[] { 0x20, 0xFF });
+                device.WriteRead(new byte[] { 0x13 }, i2CReadBuffer);
+                device.Write(new byte[] { 0x12, 0xFF });
 
                 device.Dispose();
+
+
+                //using (device = await I2cDevice.FromIdAsync(id, i2cSettings))
+                //{
+                //    i2CReadBuffer = new byte[4];
+                //    device.WriteRead(new byte[] { 0x11 }, i2CReadBuffer);
+                //    var b = BitConverter.ToSingle(i2CReadBuffer, 0);
+                //}
             }
             catch (Exception e)
             {
                 System.Diagnostics.Debug.WriteLine("Exception: {0}", e.Message);
                 return;
             }
+        }
+
+        private void Button_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            svwMain.IsPaneOpen = !svwMain.IsPaneOpen;
+        }
+
+        private void Button_Click_1(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            _tvled.Toggle();
+        }
+
+        public void Dispose()
+        {
+            _context.Dispose();
         }
     }
 
