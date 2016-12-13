@@ -96,11 +96,13 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Constants.cs" />
     <Compile Include="DeviceBus.cs" />
     <Compile Include="DeviceClient.cs" />
     <Compile Include="IClient.cs" />
     <Compile Include="MqttPublisher.cs" />
     <Compile Include="RuntimeManager.cs" />
+    <Compile Include="RuntimeManager2.cs" />
     <Compile Include="SensorDevice.cs" />
     <Compile Include="StartupTask.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -139,6 +141,12 @@
     <SDKReference Include="WindowsIoT, Version=10.0.10586.0">
       <Name>Windows IoT Extensions for the UWP</Name>
     </SDKReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\openhab.net.rest\openhab.net.rest.csproj">
+      <Project>{7b5deb49-9069-4a69-adf2-47171b4639f8}</Project>
+      <Name>openhab.net.rest</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

@@ -11,6 +11,7 @@ namespace openhab.net.rest.Http
         public MessageHandler(SiteCollection collection, string relativePath = "")
         {
             Collection = collection;
+            RelativePath = relativePath;
         }
 
         public string Content { get; set; }

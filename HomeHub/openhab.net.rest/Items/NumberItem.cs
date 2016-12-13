@@ -9,7 +9,7 @@ namespace openhab.net.rest.Items
         {
         }
 
-        float _value;
+        float _value = 0;
         public new float Value
         {
             get { return _value; }
@@ -27,7 +27,7 @@ namespace openhab.net.rest.Items
         public override void FromNative(object obj)
         {
             if (obj is float) {
-                Update(string.Format("{0:#.}", obj));
+                Update(string.Format("{0:0.}", obj));
             }
         }
 

@@ -54,7 +54,7 @@ namespace HomeHub
 
             //Loaded += (o, e) => ReadSensor().Wait();
             //_timer = ThreadPoolTimer.CreatePeriodicTimer(async _ => await ReadSensor(), TimeSpan.FromSeconds(30));
-            GetItems();
+            //GetItems();
         }
 
         async void GetItems()

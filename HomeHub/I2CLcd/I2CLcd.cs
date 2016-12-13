@@ -186,7 +186,7 @@ namespace I2CLcd
         
         void ExpanderWrite(int data)
         {
-            _deviceExpander.Write(new byte[] { Convert.ToByte(data | _backlight) });
+            _deviceExpander?.Write(new byte[] { Convert.ToByte(data | _backlight) });
         }
                 
         void DelayMicro(int micro)

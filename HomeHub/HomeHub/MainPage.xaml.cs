@@ -106,7 +106,7 @@ namespace HomeHub
         SwitchItem _tvled;
         byte[] i2CReadBuffer;
 
-        private const byte SLAVE_ADDRESS    = 0x40;
+        private const byte SLAVE_ADDRESS    = 0x34;
 
         private const byte CMD_MODUS = 0x01;
         private const byte CMD_SEQUENCE = 0x02;
@@ -122,7 +122,7 @@ namespace HomeHub
             this.InitializeComponent();
 
             //GetLed();
-            //StartI2C();
+            StartI2C();
         }
 
         async void GetLed()
@@ -162,15 +162,20 @@ namespace HomeHub
             try
             {
                 i2CReadBuffer = new byte[1];
-                var i2cSettings = new I2cConnectionSettings(SLAVE_ADDRESS);
+                //var i2cSettings = new I2cConnectionSettings(SLAVE_ADDRESS);
+                ////i2cSettings.BusSpeed = I2cBusSpeed.FastMode;
 
-                string aqs = I2cDevice.GetDeviceSelector();
+                //string aqs = I2cDevice.GetDeviceSelector();
 
-                var dis = await DeviceInformation.FindAllAsync(aqs);
+                //var dis = await DeviceInformation.FindAllAsync(aqs);
 
-                string id = dis[0].Id;
+                //string id = dis[0].Id;
 
-                device = await I2cDevice.FromIdAsync(id, i2cSettings);
+                //device = await I2cDevice.FromIdAsync(id, i2cSettings);
+
+                var info = await DeviceInformation.FindAllAsync(I2cDevice.GetDeviceSelector());
+                device = await I2cDevice.FromIdAsync(info[0].Id, new I2cConnectionSettings(SLAVE_ADDRESS));
+
 
                 //device.WriteRead(new byte[] { CMD_MODUS, (byte)Modus.PUMP }, i2CReadBuffer);
                 //device.WriteRead(new byte[] { CMD_MODUS, (byte)Modus.LED }, i2CReadBuffer);
@@ -187,8 +192,8 @@ namespace HomeHub
                 //device.WriteRead(new byte[] { 0x01, 0x01 }, i2CReadBuffer);
 
                 //device.Write(new byte[] { 0x20, 0xFF });
-                device.WriteRead(new byte[] { 0x13 }, i2CReadBuffer);
-                device.Write(new byte[] { 0x12, 0xFF });
+                //device.WriteRead(new byte[] { 0x14 }, i2CReadBuffer);
+                device.Write(new byte[] { 0x20, (byte)DateTime.Now.Hour, (byte)DateTime.Now.Minute });
 
                 device.Dispose();
 
