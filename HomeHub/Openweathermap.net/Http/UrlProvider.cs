@@ -6,7 +6,7 @@ namespace Openweathermap.net.Http
         public static string HostAddress = @"http://api.openweathermap.org";
         public static string MimeString  = @"application/json";
         
-        const string AppId      = "4f6a3ce832940a448a6eb191a3ed7cda";
+        const string AppId      = "";
         const string CityId     = "6556201";
         const string Mode       = "json";
         const string Units      = "metric";
